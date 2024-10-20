@@ -28,16 +28,7 @@
     *matRowDef="let row; columns: displayedColumns"
     (click)="onRowClicked(row.id)"
   ></tr>
-  <!-- <mat-paginator
-  [length]="100"
-  [pageSize]="10"
-  [pageSizeOptions]="[5, 10, 25, 100]"
-  aria-label="Select page"
-  [showFirstLastButtons]="true"
-  [pageIndex]="currentPage"
-  (page)="handlePageEvent($event)"
->
-</mat-paginator> -->
+
   <!-- <button mat-button (click)="openDialog()">Launch dialog</button> -->
   <h2 mat-dialog-title>Dialog with elements</h2>
   <mat-dialog-content
@@ -48,3 +39,13 @@
     <button mat-button mat-dialog-close>Close</button>
   </mat-dialog-actions>
 </table>
+<mat-paginator
+  [length]="dataSource.data.length"
+  [pageSize]="5"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page"
+  [showFirstLastButtons]="true"
+  (page)="handlePageEvent($event)"
+  [pageIndex]="currentPage"
+>
+</mat-paginator>

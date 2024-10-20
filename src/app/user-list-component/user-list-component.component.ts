@@ -1,18 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { UserService } from '../user.service';
 import { users } from '../users';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-
-export interface Users {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  birthDate?: string;
-  phoneNumber?: string;
-}
+import { MatTableDataSource } from '@angular/material/table';
+import { Users } from '../models/Users.model'; // Stelle sicher, dass der Pfad korrekt ist
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -22,19 +15,26 @@ export interface Users {
   templateUrl: './user-list-component.component.html',
   styleUrl: './user-list-component.component.css',
 })
-export class UserListComponentComponent {
-  constructor(private userService: UserService) {}
-
+export class UserListComponentComponent implements OnInit {
   displayedColumns: string[] = ['id', 'firstName', 'email'];
 
-  dataSource = this.userService.getData();
+  dataSource = new MatTableDataSource<Users>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  // handlePageEvent() {
-  //   pageEvent: PageEvent;
-  //   console.log('handlePageEvent', this.handlePageEvent);
-  //   this.currentPage= this.pageEvent.pageIndex;
-  // }
-  // currentPage = 0;
+  ngOnInit() {
+    this.dataSource.data = this.userService.getData();
+  }
+  constructor(private userService: UserService) {}
+
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+  handlePageEvent(event: PageEvent) {
+    pageEvent: PageEvent;
+    this.currentPage = event.pageIndex;
+  }
+  currentPage = 0;
 
   readonly dialog = inject(MatDialog);
 
@@ -51,3 +51,4 @@ export class FullDetailsInDialog {
     return this.userService.getData();
   }
 }
+export { Users };
