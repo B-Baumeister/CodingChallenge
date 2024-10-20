@@ -3,6 +3,7 @@ import { MatTableModule } from '@angular/material/table';
 import { UserService } from '../user.service';
 import { users } from '../users';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 export interface Users {
   id: number;
   firstName: string;
@@ -31,8 +32,17 @@ export class UserListComponentComponent {
   //   this.currentPage= this.pageEvent.pageIndex;
   // }
   // currentPage = 0;
+  readonly dialog = inject(MatDialog);
   onRowClicked(id: number) {
     this.dialog.open(FullDetailsInDialog);
     console.log('Row clicked: ', id);
+  }
+}
+
+export class FullDetailsInDialog {
+  constructor(private userService: UserService) {}
+  get openDetailsOfUser() {
+    console.log('hi');
+    return this.userService.getData();
   }
 }
