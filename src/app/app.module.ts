@@ -20,9 +20,13 @@ import {
 } from '@angular/material/dialog';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { UserDetailsDialogComponent } from './user-details-dialog-component/user-details-dialog.component.component';
 @NgModule({
-  declarations: [AppComponent, UserListComponentComponent],
+  declarations: [
+    AppComponent,
+    UserListComponentComponent,
+    UserDetailsDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

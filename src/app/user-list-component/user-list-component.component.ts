@@ -1,16 +1,10 @@
-import {
-  Component,
-  inject,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../user.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Users } from '../models/Users.model'; // Stelle sicher, dass der Pfad korrekt ist
-import { DataSource } from '@angular/cdk/collections';
+import { Users } from '../models/Users.model';
+import { UserDetailsDialogComponent } from '../user-details-dialog-component/user-details-dialog.component.component';
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -25,9 +19,11 @@ export class UserListComponentComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Users>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
 
   ngOnInit() {
     this.dataSource.data = this.userService.getData();
+    // console.log(this.dataSource.data);
   }
   constructor(private userService: UserService, private dialog: MatDialog) {}
 
@@ -40,8 +36,7 @@ export class UserListComponentComponent implements OnInit {
   currentPage = 0;
 
   openDialog(row: Users) {
-    this.dialog.open(this.dialogTemplate, { data: row });
-    console.log('selected row', row, this.dataSource.data);
+    this.dialog.open(UserDetailsDialogComponent, { data: row });
+    console.log('selected row', row.id);
   }
-  @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
 }

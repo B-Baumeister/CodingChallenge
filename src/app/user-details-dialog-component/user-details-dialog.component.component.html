@@ -1,0 +1,15 @@
+<mat-dialog-content>
+  <h3 mat-dialog-title>Details</h3>
+  <p *ngIf="data.id"><strong>ID:</strong> {{ data.id }}</p>
+  <p *ngIf="data.firstName && data.lastName">
+    <strong>Name:</strong> {{ data.firstName }} {{ data.lastName }}
+  </p>
+  <p *ngIf="data.email"><strong>Email:</strong> {{ data.email }}</p>
+  <p *ngIf="data.birthDate"><strong>birthDate:</strong> {{ data.birthDate }}</p>
+  <p *ngIf="data.phoneNumber">
+    <strong>phoneNumber:</strong> {{ data.phoneNumber }}
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
