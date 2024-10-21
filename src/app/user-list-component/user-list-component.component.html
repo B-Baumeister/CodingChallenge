@@ -1,8 +1,5 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
+  <!-- id Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>id</th>
     <td mat-cell *matCellDef="let element">{{ element.id }}</td>
@@ -16,7 +13,7 @@
     </td>
   </ng-container>
 
-  <!-- Weight Column -->
+  <!-- eMail Column -->
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef>email</th>
     <td mat-cell *matCellDef="let element">{{ element.email }}</td>
@@ -26,18 +23,10 @@
   <tr
     mat-row
     *matRowDef="let row; columns: displayedColumns"
-    (click)="onRowClicked(row.id)"
+    (click)="openDialog(row)"
   ></tr>
 
   <!-- <button mat-button (click)="openDialog()">Launch dialog</button> -->
-  <h2 mat-dialog-title>Dialog with elements</h2>
-  <mat-dialog-content
-    >This dialog showcases the title, close, content and actions
-    elements.</mat-dialog-content
-  >
-  <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-  </mat-dialog-actions>
 </table>
 <mat-paginator
   [length]="dataSource.data.length"
@@ -49,3 +38,16 @@
   [pageIndex]="currentPage"
 >
 </mat-paginator>
+<ng-template #dialogTemplate let-data="data">
+  <h2 mat-dialog-title>Dialog with elements</h2>
+  <mat-dialog-content *ngIf="dataSource.data">
+    <p><strong>ID:</strong> {{ data?.id }}</p>
+    <p><strong>Name:</strong> {{ data?.firstName }} {{ data?.lastName }}</p>
+    <p><strong>Email:</strong> {{ data?.email }}</p>
+    <p><strong>birthDate:</strong> {{ data?.birthDate }}</p>
+    <p><strong>phoneNumber:</strong> {{ data?.phoneNumber }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions></ng-template
+>

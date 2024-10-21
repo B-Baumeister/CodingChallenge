@@ -1,11 +1,16 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import {
+  Component,
+  inject,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { UserService } from '../user.service';
-import { users } from '../users';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Users } from '../models/Users.model'; // Stelle sicher, dass der Pfad korrekt ist
+import { DataSource } from '@angular/cdk/collections';
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -24,31 +29,19 @@ export class UserListComponentComponent implements OnInit {
   ngOnInit() {
     this.dataSource.data = this.userService.getData();
   }
-  constructor(private userService: UserService) {}
-
+  constructor(private userService: UserService, private dialog: MatDialog) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
   handlePageEvent(event: PageEvent) {
-    pageEvent: PageEvent;
     this.currentPage = event.pageIndex;
   }
   currentPage = 0;
 
-  readonly dialog = inject(MatDialog);
-
-  onRowClicked(id: number) {
-    this.dialog.open(FullDetailsInDialog);
-    console.log('Row clicked: ', id);
+  openDialog(row: Users) {
+    this.dialog.open(this.dialogTemplate, { data: row });
+    console.log('selected row', row, this.dataSource.data);
   }
+  @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
 }
-
-export class FullDetailsInDialog {
-  constructor(private userService: UserService) {}
-  get openDetailsOfUser() {
-    console.log('hi');
-    return this.userService.getData();
-  }
-}
-export { Users };
