@@ -19,6 +19,9 @@ import {
 } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UserDetailsDialogComponent } from './user-details-dialog-component/user-details-dialog.component.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +40,9 @@ import { UserDetailsDialogComponent } from './user-details-dialog-component/user
     MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule,
   ],
 
   providers: [provideAnimationsAsync()],

@@ -1,3 +1,7 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- id Column -->
   <ng-container matColumnDef="id">
@@ -25,7 +29,9 @@
     *matRowDef="let row; columns: displayedColumns"
     (click)="openDialog(row)"
   ></tr>
-
+<tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
  
 </table>
 <mat-paginator

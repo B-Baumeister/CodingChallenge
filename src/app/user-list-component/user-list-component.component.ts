@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Users } from '../models/Users.model';
 import { UserDetailsDialogComponent } from '../user-details-dialog-component/user-details-dialog.component.component';
-
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-user-list-component',
@@ -17,17 +17,26 @@ export class UserListComponentComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Users>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
     this.dataSource.data = this.userService.getData();
-
   }
   constructor(private userService: UserService, private dialog: MatDialog) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
   handlePageEvent(event: PageEvent) {
     this.currentPage = event.pageIndex;
   }
@@ -35,6 +44,5 @@ export class UserListComponentComponent implements OnInit {
 
   openDialog(row: Users) {
     this.dialog.open(UserDetailsDialogComponent, { data: row });
-
   }
 }
