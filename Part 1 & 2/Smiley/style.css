@@ -1,0 +1,125 @@
+body {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.box {
+  color: rgb(117, 86, 22);
+  color: rgb(227, 119, 132);
+  color: rgb(215, 84, 89);
+  width: 50vw;
+  height: 50vw;
+  max-width: 560px;
+  max-height: 560px;
+  position: relative;
+  z-index: 1;
+}
+.head {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(249, 214, 120);
+  border-radius: 50%;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.eyes {
+  position: absolute;
+  top: 32%;
+  width: 48%;
+  height: 74%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 6;
+}
+
+.eye-right,
+.eye-left {
+  /* position: absolute; */
+  background: rgb(117, 86, 22);
+  width: 28%;
+  height: 25%;
+  border-radius: 50%;
+  z-index: 6;
+}
+.mouth {
+  position: absolute;
+  background: rgb(117, 86, 22);
+  width: 60%;
+  height: 50%;
+  bottom: 15%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+.mouth-top {
+  background: rgb(249, 214, 120);
+  width: 140%;
+  height: 70%;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 38%;
+  left: -20%;
+  z-index: 8;
+}
+.mouth-top2 {
+  position: absolute;
+  background: rgb(117, 86, 22);
+  width: 100%;
+  height: 35%;
+  border-radius: 50%;
+  position: relative;
+  z-index: 7;
+}
+.tongue {
+  position: absolute;
+  background: rgb(227, 119, 132);
+  width: 50%;
+  height: 52%;
+  top: 75%;
+  right: 25%;
+  border-radius: 50%;
+  z-index: 6;
+}
+.tongue2 {
+  position: absolute;
+  background: rgb(227, 119, 132);
+  width: 100%;
+  height: 100%;
+  top: -50%;
+  right: 0%;
+  border-radius: 0%;
+  z-index: 7;
+}
+
+.middleOfTongue {
+  position: absolute;
+  background: rgb(215, 84, 89);
+  width: 10%;
+  height: 10%;
+  top: 56%;
+  right: 45%;
+  border-radius: 50%;
+  z-index: 8;
+}
+
+.middleOfTongue2 {
+  position: absolute;
+  background: rgb(215, 84, 89);
+  width: 10%;
+  height: 110%;
+  top: -50%;
+  right: 45%;
+  border-radius: 0%;
+  z-index: 8;
+}
