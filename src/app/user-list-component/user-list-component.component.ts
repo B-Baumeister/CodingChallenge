@@ -6,9 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Users } from '../models/Users.model';
 import { UserDetailsDialogComponent } from '../user-details-dialog-component/user-details-dialog.component.component';
 
-/**
- * @title Basic use of `<table mat-table>`
- */
+
 @Component({
   selector: 'app-user-list-component',
   templateUrl: './user-list-component.component.html',
@@ -19,11 +17,11 @@ export class UserListComponentComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Users>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  // @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
+
 
   ngOnInit() {
     this.dataSource.data = this.userService.getData();
-    // console.log(this.dataSource.data);
+
   }
   constructor(private userService: UserService, private dialog: MatDialog) {}
 
@@ -37,6 +35,6 @@ export class UserListComponentComponent implements OnInit {
 
   openDialog(row: Users) {
     this.dialog.open(UserDetailsDialogComponent, { data: row });
-    console.log('selected row', row.id);
+
   }
 }
